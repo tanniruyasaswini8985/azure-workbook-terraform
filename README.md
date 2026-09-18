@@ -48,12 +48,17 @@ azure-workbook-terraform/
 ├── environments/
 │   ├── dev.tfvars
 │   └── prod.tfvars
-└── .github/workflows/terraform-ci.yml
+├── .devcontainer/devcontainer.json
+├── .github/workflows/terraform-ci.yml
+└── .gitignore
 ```
 
 ## Try it for free (no Azure subscription needed)
 
 The CI pipeline runs `terraform fmt`, `init`, and `validate` in GitHub Actions. It needs no Azure credentials, so a green tick on your Actions tab proves the code is valid.
+
+<img width="1906" height="873" alt="Screenshot 2026-09-19 034832" src="https://github.com/user-attachments/assets/86a8632b-6ca0-43d6-bd4b-0d5672ef4550" />
+
 
 To run the same checks in a GitHub Codespace (Terraform is preinstalled through `.devcontainer`):
 
@@ -89,6 +94,12 @@ terraform destroy -var-file=environments/dev.tfvars
 - **Workbook as a template:** the workbook JSON lives in `workbook.json.tpl`, so changes appear as clean diffs in pull requests.
 - **Deterministic workbook ID:** `uuidv5` generates a stable ID per environment, so re-applying never creates duplicates.
 - **CI without secrets:** validation runs on every push and pull request with no cloud credentials.
+
+## What I learned
+
+- Workbook names must be GUIDs, so I used a deterministic UUID to keep applies repeatable.
+- Keeping the workbook JSON in a template file makes changes easy to review.
+- Terraform's `validate` catches structure errors without needing any cloud credentials.
 
 ## Roadmap
 
