@@ -1,0 +1,12 @@
+{
+  "name": "terraform-azure",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/terraform:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["hashicorp.terraform"]
+    }
+  }
+}
